@@ -51,6 +51,7 @@ jobs:
       - name: Build application
         run: |
           source ~/zephyrproject/.venv/bin/activate
+          export ZEPHYR_BASE=~/zephyrproject/zephyr
           cd $GITHUB_WORKSPACE
           west build -b ${{ matrix.board }} $GITHUB_WORKSPACE
 
