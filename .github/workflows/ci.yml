@@ -53,7 +53,7 @@ jobs:
           source ~/zephyrproject/.venv/bin/activate
           export ZEPHYR_BASE=~/zephyrproject/zephyr
           cd $GITHUB_WORKSPACE
-          west build -b ${{ matrix.board }} .
+          west build -b ${{ matrix.board }} --pristine
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
