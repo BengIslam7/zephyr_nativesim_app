@@ -53,15 +53,13 @@ jobs:
           source ~/zephyrproject/.venv/bin/activate
           export ZEPHYR_BASE=~/zephyrproject/zephyr
           cd $GITHUB_WORKSPACE
-          west build -b ${{ matrix.board }} --pristine -d .
-          pwd
-          ls
+          west build -b ${{ matrix.board }} --pristine
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
         with:
           name: zephyr_firmware_${{ matrix.board }}
-          path: $GITHUB_WORKSPACE/build/zephyr/zephyr.*
+          path: $GITHUB_WORKSPACE/build/zephyr/zephyr.elf
 
   release:
     needs: build
@@ -79,6 +77,6 @@ jobs:
       - name: Create GitHub Release and upload firmware
         uses: softprops/action-gh-release@v1
         with:
-          files: zephyr.*
+          files: zephyr.elf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
