@@ -51,11 +51,28 @@ jobs:
       - name: Build application
         run: |
           source ~/zephyrproject/.venv/bin/activate
-          cd ~/zephyrproject/zephyr_nativesim_app
+          cd $GITHUB_WORKSPACE
           west build -b ${{ matrix.board }} --pristine
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
         with:
           name: zephyr_firmware_${{ matrix.board }}
-          path: ~/zephyrproject/zephyr_nativesim_app/build/zephyr/zephyr.elf
+          path: $GITHUB_WORKSPACE/build/zephyr/zephyr.*
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download firmware artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: zephyr_firmware_${{ matrix.board }}
+
+      - name: Create GitHub Release and upload firmware
+        uses: softprops/action-gh-release@v1
+        with:
+          files: zephyr.*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
