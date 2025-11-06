@@ -52,7 +52,7 @@ jobs:
         run: |
           source ~/zephyrproject/.venv/bin/activate
           cd ~/zephyrproject/zephyr_nativesim_app
-          west build -b ${{ matrix.board }} $GITHUB_WORKSPACE
+          west build -b ${{ matrix.board }} --pristine
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
