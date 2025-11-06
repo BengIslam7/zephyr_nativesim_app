@@ -1,4 +1,4 @@
-name: Zephyr CI
+name: Zephyr CI/CD Pipeline
 
 on:
   push:
@@ -53,17 +53,20 @@ jobs:
           source ~/zephyrproject/.venv/bin/activate
           export ZEPHYR_BASE=~/zephyrproject/zephyr
           cd $GITHUB_WORKSPACE
-          west build -b ${{ matrix.board }} $GITHUB_WORKSPACE
+          west build -b ${{ matrix.board }} .
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
         with:
           name: zephyr_firmware_${{ matrix.board }}
-          path: ~/zephyrproject/build/zephyr/zephyr.*
+          path: $GITHUB_WORKSPACE/build/zephyr/zephyr.*
 
   release:
     needs: build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        board: [ native_sim ]  # ← change this to your board(s)
 
     steps:
       - name: Download firmware artifact
@@ -74,6 +77,6 @@ jobs:
       - name: Create GitHub Release and upload firmware
         uses: softprops/action-gh-release@v1
         with:
-          files: zephyr/zephyr.*
+          files: zephyr.*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
