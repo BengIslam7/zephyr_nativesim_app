@@ -55,6 +55,9 @@ jobs:
           cd $GITHUB_WORKSPACE
           west build -b ${{ matrix.board }} --pristine
 
+      - name: Check build output
+        run: ls -l $GITHUB_WORKSPACE/build/zephyr
+
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
         with:
