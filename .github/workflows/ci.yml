@@ -62,7 +62,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: zephyr_firmware_${{ matrix.board }}
-          path: $GITHUB_WORKSPACE/build/zephyr/zephyr.elf
+          path: |
+            build/zephyr/zephyr.elf
+            build/zephyr/zephyr.exe
 
   release:
     needs: build
@@ -80,6 +82,8 @@ jobs:
       - name: Create GitHub Release and upload firmware
         uses: softprops/action-gh-release@v1
         with:
-          files: zephyr.elf
+          files: |
+            zephyr.elf
+            zephyr.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
