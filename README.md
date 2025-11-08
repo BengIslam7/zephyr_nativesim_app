@@ -1,6 +1,6 @@
 # zephyr_nativesim_app
 
-[![CI/CD Pipeline](https://github.com/<BengIslam7>/<zephyr_nativesim_app>/actions/workflows/zephyr-ci-cd.yml/badge.svg)](https://github.com/<BengIslam7>/<zephyr_nativesim_app>/actions/workflows/zephyr-ci-cd.yml)
+[![CI/CD Pipeline](https://github.com/BengIslam7/zephyr_nativesim_app/actions/workflows/zephyr-ci-cd.yml/badge.svg)](https://github.com/BengIslam7/zephyr_nativesim_app/actions/workflows/zephyr-ci-cd.yml)
 
 # Zephyr Project (Native Simulation)
 
