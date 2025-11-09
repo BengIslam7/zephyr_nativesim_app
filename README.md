@@ -1,6 +1,6 @@
 # zephyr_nativesim_app
 
-[![Zephyr CI/CD Pipeline](https://github.com/BengIslam7/zephyr_nativesim_app/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/BengIslam7/zephyr_nativesim_app/actions/workflows/ci-cd.yml)
+[![Zephyr CI/CD Pipeline](https://github.com/BengIslam7/zephyr_nativesim_app/actions/workflows/zephyr-ci-cd.yml/badge.svg)](https://github.com/BengIslam7/zephyr_nativesim_app/actions/workflows/zephyr-ci-cd.yml)
 
 # Zephyr Project (Native Simulation)
 
@@ -90,6 +90,8 @@ The pipeline runs on:
    * Downloads the firmware artifact from the build job.
    * Creates a GitHub Release and attaches the firmware files.
 
+> ⚠️ Adjust `matrix:board:[]` in `.github/workflows/ci-cd.yml` for additional boards as needed.
+
 ---
 
 ## 📝 Notes
@@ -97,5 +99,3 @@ The pipeline runs on:
 * The `native_sim` board is ideal for testing Zephyr applications on your host without hardware.
 * To build for a real board, replace `native_sim` with your board name (e.g., `nucleo_f746zg`).
 * The CI/CD workflow ensures your firmware is automatically built and optionally released on GitHub.
-
----
